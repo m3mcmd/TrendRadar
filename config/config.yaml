@@ -66,40 +66,24 @@ platforms:
   api_url: ""                            # 热榜数据 API 地址（留空使用默认地址）
                                         # 如果你自行部署了 newsnow，填入你的地址，如: https://your-domain.com/api/s
   sources:
-    - id: "toutiao"
-      name: "今日头条"
-      expected_domain: "toutiao.com"
-    - id: "baidu"
-      name: "百度热搜"
-      expected_domain: "baidu.com"
     - id: "wallstreetcn-hot"
       name: "华尔街见闻"
       expected_domain: "wallstreetcn.com"
-    - id: "thepaper"
-      name: "澎湃新闻"
-      expected_domain: "thepaper.cn"
-    - id: "bilibili-hot-search"
-      name: "bilibili 热搜"
-      expected_domain: "bilibili.com"
     - id: "cls-hot"
       name: "财联社热门"
       expected_domain: "cls.cn"
+    - id: "thepaper"
+      name: "澎湃新闻"
+      expected_domain: "thepaper.cn"
     - id: "ifeng"
       name: "凤凰网"
       expected_domain: "ifeng.com"
-    - id: "tieba"
-      name: "贴吧"
+    - id: "baidu"
+      name: "百度热搜"
       expected_domain: "baidu.com"
-    - id: "weibo"
-      name: "微博"
-      expected_domain: "weibo.com"
-    - id: "douyin"
-      name: "抖音"
-      expected_domain: "douyin.com"
     - id: "zhihu"
       name: "知乎"
       expected_domain: "zhihu.com"
-
 
 
 # ===============================================================
@@ -162,13 +146,13 @@ report:
                                       # keyword = 按关键词分组显示
                                       # platform = 按平台/来源分组显示
 
-  sort_by_position_first: false       # 关键词模式排序（仅 display_mode=keyword 时生效）
+  sort_by_position_first: true       # 关键词模式排序（仅 display_mode=keyword 时生效）
                                       # true = 按 frequency_words.txt 的定义顺序
                                       # false = 按匹配到的热点条数排序（多的在前）
 
   rank_threshold: 5                   # 排名高亮阈值（影响展示强调，不改变抓取范围）
 
-  max_news_per_keyword: 0             # 每个关键词/标签最大显示数量（0=不限制，仅影响展示裁剪）
+  max_news_per_keyword: 10             # 每个关键词/标签最大显示数量（0=不限制，仅影响展示裁剪）
 
 
 # ===============================================================
@@ -240,7 +224,7 @@ display:
 
     rss: true                         # RSS 订阅区域（true=显示并分析, false=隐藏并跳过分析）
     standalone: false                 # 独立展示区：完整热榜/RSS，不受关键词过滤（true=显示, false=隐藏）
-    ai_analysis: true                 # AI 分析区域（true=显示, false=隐藏）
+    ai_analysis: false                 # AI 分析区域（true=显示, false=隐藏）
 
   # 独立展示区：将指定平台/RSS 完整展示，不受关键词过滤
   # 推送展示由 regions.standalone 控制，AI 分析由 ai_analysis.include_standalone 控制
@@ -260,7 +244,7 @@ display:
 #    配对项（如 Telegram token 和 chat_id）数量必须一致
 # ===============================================================
 notification:
-  enabled: true                       # 是否启用通知功能（true=启用, false=关闭）—— 总开关
+  enabled: false                       # 是否启用通知功能（true=启用, false=关闭）—— 总开关
                                       # 开启 schedule 后此项仍为总开关：false=永远不推送，true=由调度控制
 
   # 推送渠道配置
@@ -411,7 +395,7 @@ ai:
 # 9. AI 分析功能（模型配置见上方 ai 段）
 # ===============================================================
 ai_analysis:
-  enabled: true                     # 是否启用 AI 分析（true=启用, false=关闭）—— 总开关
+  enabled: false                     # 是否启用 AI 分析（true=启用, false=关闭）—— 总开关
                                     # 开启 schedule 后此项仍为总开关：false=永远不分析，true=由调度控制
 
   language: "Chinese"               # 分析报告语言（如 "English", "Korean", "法语"）
@@ -440,7 +424,7 @@ ai_analysis:
 # 对推送标题进行翻译，不包含 AI 分析的内容
 # ===============================================================
 ai_translation:
-  enabled: true                     # 是否启用翻译功能（true=启用, false=关闭）
+  enabled: false                     # 是否启用翻译功能（true=启用, false=关闭）
   language: "中文"                   # 翻译目标语言（如 "English", "Korean", "法语"）
   prompt_file: "ai_translation_prompt.txt"   # 提示词文件（相对于 config 目录）
 
